@@ -4,6 +4,7 @@ from urllib.parse import quote_plus, unquote_plus
 import json
 import http.server
 import socketserver
+import re
 
 with open('bang.js', 'r') as f:
     bangs = json.loads(f.read())
@@ -20,7 +21,7 @@ USAGE = (
 
 class JustBangsHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
-        query = unquote_plus(self.path.lstrip('/'))
+        query = unquote_plus(re.sub(r'[^/]*/', '', self.path))
         bang = None
         non_bangs = []
 
