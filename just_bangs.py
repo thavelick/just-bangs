@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from pathlib import Path
 from urllib.parse import quote_plus, unquote_plus
 import json
 import http.server
@@ -6,6 +7,11 @@ import socketserver
 
 with open('bang.js', 'r') as f:
     bangs = json.loads(f.read())
+
+custom_bangs = 'custom-bang.js'
+if Path(custom_bangs).exists():
+    with open(custom_bangs, 'r') as f:
+        bangs = json.loads(f.read()) + bangs
 
 PORT = 8484
 USAGE = (
