@@ -12,7 +12,7 @@ A clone of duck duck go, but with no index. Just the bangs!
     ./just_bangs
     ```
 2. Open your browser to http://localhost:8484/
-3. Append your search query to the url, with a bang: 
+3. Append your search query to the url, with a bang:
   http://localhost:8484/gh!+just+bangs
 
 ## Dependencies
