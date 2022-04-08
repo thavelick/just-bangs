@@ -19,6 +19,17 @@ A clone of duck duck go, but with no index. Just the bangs!
 4. Append your search query to the url, with a bang:
    http://localhost:8484/gh!+just+bangs
 
+### Environment variables
+
+* `JUST_BANGS_DEFAULT_BANG`: The bang to use when none is specified. Without
+ this, queries without a bang will show a page with a simple usage example.
+* `JUST_BANGS_PORT`: The http port on which the server should run. Defaults
+  to 8484
+* `JUST_BANGS_MAIN_FILE`: The path to the file containing all the normal bangs
+  from DDG. Defaults to `./bang.js`
+* `JUST_BANGS_CUSTOM_FILE`: The path to the file containing custom bangs.
+  Defaults to `./custom-bang.js`
+
 ## Dependencies
 * Python 3.10
   * That's it

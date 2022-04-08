@@ -7,19 +7,21 @@ import os
 import re
 import socketserver
 
-with open('bang.js', 'r') as f:
-    bangs = json.loads(f.read())
-
-custom_bangs = 'custom-bang.js'
-if Path(custom_bangs).exists():
-    with open(custom_bangs, 'r') as f:
-        bangs = json.loads(f.read()) + bangs
-
-PORT = int(os.environ.get('JUST_BANGS_PORT', 8484))
 DEFAULT_BANG = os.environ.get('JUST_BANGS_DEFAULT_BANG', None)
+PORT = int(os.environ.get('JUST_BANGS_PORT', 8484))
+MAIN_FILE = os.environ.get('JUST_BANGS_MAIN_FILE', 'bang.js')
+CUSTOM_FILE = os.environ.get('JUST_BANGS_CUSTOM_FILE', 'custom-bang.js')
 USAGE = (
     'give me a bang! Example: http://localhost:{}/gh!+just+bangs'
 ).format(PORT)
+
+
+with open(MAIN_FILE, 'r') as f:
+    bangs = json.loads(f.read())
+
+if Path(CUSTOM_FILE).exists():
+    with open(CUSTOM_FILE, 'r') as f:
+        bangs = json.loads(f.read()) + bangs
 
 class JustBangsHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
