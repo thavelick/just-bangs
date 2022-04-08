@@ -1,6 +1,7 @@
 # Just Bangs
 
 A clone of duck duck go, but with no index. Just the bangs!
+* [What are bangs?](https://duckduckgo.com/bang)
 
 ## Installation and Usage
 
@@ -22,7 +23,7 @@ A clone of duck duck go, but with no index. Just the bangs!
 
 ## Created By
 * [@Sandra@idiomdrottning.org](https://idiomdrottning.org/users/Sandra) - idea, inspiration, finding the bangs data file
-* Tristan Havelick ([@Natris1979@social.linux.pizza](https://social.linux.pizza/@Natris1979)) - programming
+* [Tristan Havelick](https://social.linux.pizza/@Natris1979)) - programming
 
 ## TODO
 * Add environment variables for:
@@ -30,4 +31,3 @@ A clone of duck duck go, but with no index. Just the bangs!
   * Port
   * Default bang?
 * Add a homepage with a simple seach box
-* Commission an artist to make a cute logo and put it on the homepage
