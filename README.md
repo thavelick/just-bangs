@@ -21,8 +21,8 @@ A clone of duck duck go, but with no index. Just the bangs!
   * It probably works with most any Python 3.x but I didn't test it.
 
 ## Created By
-* @Sandra@idiomdrottning.org - idea, inspiration, finding the bangs data file
-* Tristan Havelick (@Natris1979@social.linux.pizza) - programming
+* [@Sandra@idiomdrottning.org](https://idiomdrottning.org/users/Sandra) - idea, inspiration, finding the bangs data file
+* Tristan Havelick ([@Natris1979@social.linux.pizza](https://social.linux.pizza/@Natris1979)) - programming
 
 ## TODO
 * Add environment variables for:
