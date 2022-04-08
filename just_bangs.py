@@ -1,11 +1,18 @@
 #!/usr/bin/python3
+from pathlib import Path
 from urllib.parse import quote_plus, unquote_plus
 import json
 import http.server
 import socketserver
+import re
 
 with open('bang.js', 'r') as f:
     bangs = json.loads(f.read())
+
+custom_bangs = 'custom-bang.js'
+if Path(custom_bangs).exists():
+    with open(custom_bangs, 'r') as f:
+        bangs = json.loads(f.read()) + bangs
 
 PORT = 8484
 USAGE = (
@@ -14,8 +21,8 @@ USAGE = (
 
 class JustBangsHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
-        query = unquote_plus(self.path.lstrip('/'))
-        bang = None 
+        query = unquote_plus(re.sub(r'[^/]*/', '', self.path))
+        bang = None
         non_bangs = []
 
         # This is probably a little too naive. DDG doesn't treat words with
@@ -26,15 +33,15 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
                 bang = word[1:]
             elif word[-1:] == '!':
                 bang = word[:-1]
-            else:         
+            else:
                 non_bangs.append(word)
 
         if bang:
-            bang = bang.strip('!')
+            bang = bang.strip('!').lower()
             matching_bang_info = [b for b in bangs if b.get('t') == bang]
             if len(matching_bang_info) > 0 and len(non_bangs) > 0:
                 self.do_search(matching_bang_info[0], ' '.join(non_bangs))
-        
+
         self.do_text(USAGE)
 
     def do_search(self, bang_info, query):
