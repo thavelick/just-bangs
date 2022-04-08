@@ -3,8 +3,9 @@ from pathlib import Path
 from urllib.parse import quote_plus, unquote_plus
 import json
 import http.server
-import socketserver
+import os
 import re
+import socketserver
 
 with open('bang.js', 'r') as f:
     bangs = json.loads(f.read())
@@ -14,7 +15,7 @@ if Path(custom_bangs).exists():
     with open(custom_bangs, 'r') as f:
         bangs = json.loads(f.read()) + bangs
 
-PORT = 8484
+PORT = int(os.environ.get('JUST_BANGS_PORT', 8484))
 USAGE = (
     'give me a bang! Example: http://localhost:{}/gh!+just+bangs'
 ).format(PORT)
