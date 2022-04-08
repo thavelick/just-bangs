@@ -31,5 +31,6 @@ A clone of duck duck go, but with no index. Just the bangs!
 * Add environment variables for:
   * Location of bangs file
   * Port
-* Add a homepage with a simple search box
-* Make a cute logo and put it on the homepage
+  * Default bang?
+* Add a homepage with a simple seach box
+* Commission an artist to make a cute logo and put it on the homepage
