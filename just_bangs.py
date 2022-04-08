@@ -16,6 +16,7 @@ if Path(custom_bangs).exists():
         bangs = json.loads(f.read()) + bangs
 
 PORT = int(os.environ.get('JUST_BANGS_PORT', 8484))
+DEFAULT_BANG = os.environ.get('JUST_BANGS_DEFAULT_BANG', None)
 USAGE = (
     'give me a bang! Example: http://localhost:{}/gh!+just+bangs'
 ).format(PORT)
@@ -23,7 +24,7 @@ USAGE = (
 class JustBangsHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         query = unquote_plus(re.sub(r'[^/]*/', '', self.path))
-        bang = None
+        bang = DEFAULT_BANG
         non_bangs = []
 
         # This is probably a little too naive. DDG doesn't treat words with

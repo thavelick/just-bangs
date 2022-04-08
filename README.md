@@ -25,11 +25,11 @@ A clone of duck duck go, but with no index. Just the bangs!
   * It probably works with most any Python 3.x but I didn't test it.
 
 ## Created By
-* [Idiomdrottning](https://idiomdrottning.org/about) - idea, finding the bangs data file, adding `custom-bang.js`
-* [Tristan Havelick](https:/tristanhavelick.com)) - programming
+* [Idiomdrottning](https://idiomdrottning.org/about) - idea, finding the bangs
+    data file, adding `custom-bang.js`
+* [Tristan Havelick](https:/tristanhavelick.com)) - initial programming
 
 ## TODO
 * Add environment variables for:
   * Location of bangs file
-  * Default bang?
 * Add a homepage with a simple seach box
