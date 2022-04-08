@@ -37,7 +37,7 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
                 non_bangs.append(word)
 
         if bang:
-            bang = bang.strip('!')
+            bang = bang.strip('!').lower()
             matching_bang_info = [b for b in bangs if b.get('t') == bang]
             if len(matching_bang_info) > 0 and len(non_bangs) > 0:
                 self.do_search(matching_bang_info[0], ' '.join(non_bangs))
