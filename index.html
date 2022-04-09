@@ -1,78 +1,69 @@
 <!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=1;">
     <title>Just Bangs!</title>
     <style>
     html {
       font-family: "Tex Gyre Heros", "Nimbus Sans L", Helvetica, Arial, sans-serif;
-      background: #fff url("just-bangs.svg") no-repeat right bottom;
+      font-size: 100%;
+      background: white url("just-bangs.svg") no-repeat right bottom;
       background-size: auto 100%;
       height: 100%;
       margin: 0;
     }
 
     h1 {
-      font-size: 32px;
       font-weight: bold;
-      color: #de5833;
+      font-size: 320%;
+      color: #2d4f8e;
       text-align: center;
     }
 
     body {
       position: relative;
-      top: 25%
+      top: 25%;
     }
 
     form {
-      max-width: 700px;
+      max-width: 50em;
       margin: auto;
       display: flex;
     }
 
+    input {
+      font-family: "Tex Gyre Heros", "Nimbus Sans L", Helvetica, Arial, sans-serif;
+      border-radius: 0.2em;
+      padding: 0.3em 0.2em 0.05em;
+      font-size: 160%;
+
+    }
+
     input[type="text"] {
-      border: 1px solid #2d4f8e;
-      outline-color: #2d4f8e;
-      border-radius: 3px;
-      font-size: 20px;
-      padding: 5px 6px;
+      border: thick solid #de5833;
+      outline-color: #de5833;
+      background-color: white;
+      color: black;
       text-align: left;
-      height: 28px;
       flex: auto;
       width: 100%;
     }
 
     input[type="submit"] {
-      height: 40px;
-      font-size: 20px;
+      border: thick solid #64bb45;
+      outline-color: #64bb45;
+      background-color: #64bb45;
+      color: white;
       cursor: pointer;
       flex: none;
-      margin-left: 6px;
+      margin-left: 0.2em;
     }
 
-    @media only screen and (max-device-width: 700px) {
-      body {
-        width: 100%;
-        margin-left: 2px;
-        padding: 0
-      }
-
-      .query {
-        width: 160px
-      }
-    }
-
-    @media only screen and (max-device-width: 701px) and (orientation: landscape) {
-      .query {
-        width: 253px
-      }
-    }
     </style>
 </head>
 <body>
     <h1>Just Bangs!</h1>
     <form action="/" method="get">
-	<input type="text" size="40" name="q" autocomplete="off" value="" autofocus=""/> <input type="submit" value="Search"/>
+	<input type="text" name="q" autocomplete="off" value="" autofocus=""/> <input type="submit" value="Search"/>
     </form>
 </body>
 </html>
