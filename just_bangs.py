@@ -40,7 +40,6 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
                                   # get the value of that
         )
 
-        print('query:', query)
         if len(query) == 0:
             self.do_file('index.html', 'text/html')
             return
@@ -76,15 +75,9 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
             content = f.read()
         self.do_text(content, content_type)
 
-
     def do_search(self, bang_info, query):
         url = bang_info.get('u')
         url = url.replace('{{{s}}}', quote_plus(query))
-        text = json.dumps({
-            'info': bang_info,
-            'query': quote_plus(query),
-            'url': url,
-        })
         self.do_redirect(url)
 
     def do_redirect(self, url):
@@ -103,4 +96,3 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
 with socketserver.TCPServer(("", PORT), JustBangsHandler) as httpd:
     print("serving at port", PORT)
     httpd.serve_forever()
-
