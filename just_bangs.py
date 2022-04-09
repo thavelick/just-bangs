@@ -4,17 +4,17 @@ from urllib.parse import quote_plus, unquote_plus
 import json
 import http.server
 import os
-import re
 import socketserver
 
 DEFAULT_BANG = os.environ.get('JUST_BANGS_DEFAULT_BANG', None)
 PORT = int(os.environ.get('JUST_BANGS_PORT', 8484))
 MAIN_FILE = os.environ.get('JUST_BANGS_MAIN_FILE', 'bang.js')
 CUSTOM_FILE = os.environ.get('JUST_BANGS_CUSTOM_FILE', 'custom-bang.js')
+
+LOGO_FILE = 'just-bangs.svg'
 USAGE = (
     'give me a bang! Example: http://localhost:{}/gh!+just+bangs'
 ).format(PORT)
-
 
 with open(MAIN_FILE, 'r') as f:
     bangs = json.loads(f.read())
@@ -25,7 +25,29 @@ if Path(CUSTOM_FILE).exists():
 
 class JustBangsHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
-        query = unquote_plus(re.sub(r'[^/]*/', '', self.path))
+        # when constructing a url, the query can be specified after the first
+        # slash like this:
+        #  * http://localhost:8484/my+query+sp!
+        # or, to support the search from the homepage, the query can be
+        # specified in a querystring variable q like this:
+        #  * http://localhost:8484/?q=my+query+sp!
+        # In either case, the query can be in a subfolder, so everything
+        # before the last slash in the url will be ignored
+        query = unquote_plus( # url decode
+            self.path # the path and querystring
+            .split('/')[-1:][0] # get everything after the last /
+            .split('?q=')[-1:][0] # if there's  querystirng variable `q`,
+                                  # get the value of that
+        )
+
+        print('query:', query)
+        if len(query) == 0:
+            self.do_file('index.html', 'text/html')
+            return
+        if query == LOGO_FILE:
+            self.do_file(LOGO_FILE, 'image/svg+xml')
+            return
+
         bang = DEFAULT_BANG
         non_bangs = []
 
@@ -48,6 +70,12 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
 
         self.do_text(USAGE)
 
+    def do_file(self, path, content_type):
+        with open(path, 'r') as f:
+            content = f.read()
+        self.do_text(content, content_type)
+
+
     def do_search(self, bang_info, query):
         url = bang_info.get('u')
         url = url.replace('{{{s}}}', quote_plus(query))
@@ -63,10 +91,10 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
         self.send_header('Location', url)
         self.end_headers()
 
-    def do_text(self, text):
+    def do_text(self, text, content_type='text/plain'):
         text = str.encode(text)
         self.send_response(200)
-        self.send_header('Content-type', 'text/plain')
+        self.send_header('Content-type', content_type)
         self.send_header('Content-length', len(text))
         self.end_headers()
         self.wfile.write(text)
