@@ -1,6 +1,7 @@
 # Just Bangs
 
 A clone of duck duck go, but with no index. Just the bangs!
+
 * [What are bangs?](https://duckduckgo.com/bang)
 
 ## Installation and Usage
@@ -12,17 +13,18 @@ A clone of duck duck go, but with no index. Just the bangs!
     curl -fLO https://duckduckgo.com/bang.js
     ./just_bangs
     ```
-2. Optionally, create a `custom-bang.js` file that will shadow the
-   downloaded bangs. You only need the `t` and `u` fields on the
-   custom bangs.
+2. Optionally, before starting the server, create a `custom-bang.js`
+   file that will shadow the downloaded bangs. You only need the `t`
+   and `u` fields on the custom bangs.
 3. Open your browser to http://localhost:8484/
 4. Append your search query to the url, with a bang:
    http://localhost:8484/gh!+just+bangs
 
 ### Environment variables
 
-* `JUST_BANGS_DEFAULT_BANG`: The bang to use when none is specified. Without
- this, queries without a bang will show a page with a simple usage example.
+* `JUST_BANGS_DEFAULT_BANG`: The bang to use when none is specified.
+  Without this, queries without a bang will show a page with a simple
+  usage example.
 * `JUST_BANGS_PORT`: The http port on which the server should run. Defaults
   to 8484
 * `JUST_BANGS_MAIN_FILE`: The path to the file containing all the normal bangs
@@ -37,5 +39,5 @@ A clone of duck duck go, but with no index. Just the bangs!
 
 ## Created By
 * [Idiomdrottning](https://idiomdrottning.org/about) - idea, finding the bangs
-    data file, adding `custom-bang.js`
+  data file, adding `custom-bang.js`
 * [Tristan Havelick](https:/tristanhavelick.com) - initial programming
