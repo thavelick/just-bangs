@@ -67,6 +67,7 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
             matching_bang_info = [b for b in bangs if b.get('t') == bang]
             if len(matching_bang_info) > 0 and len(non_bangs) > 0:
                 self.do_search(matching_bang_info[0], ' '.join(non_bangs))
+                return
 
         self.do_text(USAGE)
 
