@@ -39,6 +39,3 @@ A clone of duck duck go, but with no index. Just the bangs!
 * [Idiomdrottning](https://idiomdrottning.org/about) - idea, finding the bangs
     data file, adding `custom-bang.js`
 * [Tristan Havelick](https:/tristanhavelick.com) - initial programming
-
-## TODO
-* Add a homepage with a simple seach box
