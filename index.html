@@ -1,6 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=1;">
@@ -8,52 +6,48 @@
     <style>
     html {
       font-family: "Tex Gyre Heros", "Nimbus Sans L", Helvetica, Arial, sans-serif;
-    }
-
-    html, body {
+      background: #fff url("just-bangs.svg") no-repeat right bottom;
+      background-size: auto 100%;
       height: 100%;
       margin: 0;
     }
 
-    .wrapper {
-      background-color: #fff;
-      background-image: url("just-bangs.svg");
-      background-position: right bottom;
-      background-repeat: no-repeat;
-      background-size: auto 100%;
-      height: 100%;
-    }
-
-    .header {
+    h1 {
       font-size: 32px;
       font-weight: bold;
       color: #de5833;
+      text-align: center;
     }
 
-    #lite_wrapper {
+    body {
       position: relative;
       top: 25%
     }
 
-    .query {
-      border-color: #2d4f8e;
+    form {
+      max-width: 700px;
+      margin: auto;
+      display: flex;
+    }
+
+    input[type="text"] {
+      border: 1px solid #2d4f8e;
       outline-color: #2d4f8e;
-      border-style: solid solid solid solid;
-      border-width: 1px 1px 1px 1px;
-      -moz-border-radius: 3px;
       border-radius: 3px;
       font-size: 20px;
       padding: 5px 6px;
       text-align: left;
-      width: 60%;
-      max-width: 600px;
-      height: 28px
+      height: 28px;
+      flex: auto;
+      width: 100%;
     }
 
-    .submit {
+    input[type="submit"] {
       height: 40px;
       font-size: 20px;
-      cursor: pointer
+      cursor: pointer;
+      flex: none;
+      margin-left: 6px;
     }
 
     @media only screen and (max-device-width: 700px) {
@@ -76,15 +70,9 @@
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <center id="lite_wrapper">
-            <br>
-            <span class="header">Just Bangs!</span><br>
-            <br>
-            <form action="/" method="get">
-                <input class='query' type="text" size="40" name="q" autocomplete="off" value="" autofocus=""> <input class='submit' type="submit" value="Search">
-            </form><br>
-        </center>
-    </div>
+    <h1>Just Bangs!</h1>
+    <form action="/" method="get">
+	<input type="text" size="40" name="q" autocomplete="off" value="" autofocus=""/> <input type="submit" value="Search"/>
+    </form>
 </body>
 </html>
