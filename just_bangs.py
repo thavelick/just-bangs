@@ -10,6 +10,7 @@ DEFAULT_BANG = os.environ.get('JUST_BANGS_DEFAULT_BANG', None)
 PORT = int(os.environ.get('JUST_BANGS_PORT', 8484))
 MAIN_FILE = os.environ.get('JUST_BANGS_MAIN_FILE', 'bang.js')
 CUSTOM_FILE = os.environ.get('JUST_BANGS_CUSTOM_FILE', 'custom-bang.js')
+BASE_URL_PATH = '/' + os.environ.get('JUST_BANGS_BASE_URL_PATH', '').strip('/')
 
 LOGO_FILE = 'just-bangs.svg'
 USAGE = (
@@ -25,6 +26,12 @@ if Path(CUSTOM_FILE).exists():
 
 class JustBangsHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
+        path = self.path
+
+        # strip off the base path,
+        if path.startswith(BASE_URL_PATH):
+            path = '/' + path[len(BASE_URL_PATH):]
+
         # when constructing a url, the query can be specified after the first
         # slash like this:
         #  * http://localhost:8484/my+query+sp!
@@ -34,11 +41,12 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
         # In either case, the query can be in a subfolder, so everything
         # before the last slash in the url will be ignored
         query = unquote_plus( # url decode
-            self.path # the path and querystring
+            path # the path and querystring
             .split('/')[-1:][0] # get everything after the last /
             .split('?q=')[-1:][0] # if there's  querystirng variable `q`,
                                   # get the value of that
         )
+        print(query)
 
         if len(query) == 0:
             self.do_file('index.html', 'text/html')
