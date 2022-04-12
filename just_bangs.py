@@ -74,7 +74,7 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
                 self.do_search(matching_bang_info[0], ' '.join(non_bangs))
                 return
 
-        self.do_text(USAGE)
+        self.do_text(USAGE, status_code=404)
 
     def do_file(self, path, content_type):
         with open(path, 'r') as f:
@@ -91,9 +91,9 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
         self.send_header('Location', url)
         self.end_headers()
 
-    def do_text(self, text, content_type='text/plain'):
+    def do_text(self, text, content_type='text/plain', status_code=200):
         text = str.encode(text)
-        self.send_response(200)
+        self.send_response(status_code)
         self.send_header('Content-type', content_type)
         self.send_header('Content-length', len(text))
         self.end_headers()
