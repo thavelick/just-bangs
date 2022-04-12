@@ -30,7 +30,7 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
 
         # strip off the base path,
         if path.startswith(BASE_URL_PATH):
-            path = '/' + path[len(BASE_URL_PATH):]
+            path = path[len(BASE_URL_PATH):]
 
         # when constructing a url, the query can be specified after the first
         # slash like this:
@@ -38,11 +38,9 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
         # or, to support the search from the homepage, the query can be
         # specified in a querystring variable q like this:
         #  * http://localhost:8484/?q=my+query+sp!
-        # In either case, the query can be in a subfolder, so everything
-        # before the last slash in the url will be ignored
         query = unquote_plus( # url decode
             path # the path and querystring
-            .split('/')[-1:][0] # get everything after the last /
+            .lstrip('/') # strip off the starting slash
             .split('?q=')[-1:][0] # if there's  querystirng variable `q`,
                                   # get the value of that
         )
