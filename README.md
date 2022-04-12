@@ -31,6 +31,9 @@ A clone of duck duck go, but with no index. Just the bangs!
   from DDG. Defaults to `./bang.js`
 * `JUST_BANGS_CUSTOM_FILE`: The path to the file containing custom bangs.
   Defaults to `./custom-bang.js`
+* `JUST_BANGS_BASE_URL_PATH`: Normally, just bangs runs from the root, but
+   if you're going to run it from a subfolder, specify that folder here
+   to ensure that url parsing works as it should
 
 ## Dependencies
 * Python 3.10
