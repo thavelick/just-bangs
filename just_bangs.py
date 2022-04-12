@@ -44,10 +44,12 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
             .split('?q=')[-1:][0] # if there's  querystirng variable `q`,
                                   # get the value of that
         )
-        print(query)
 
         if len(query) == 0:
             self.do_file('index.html', 'text/html')
+            return
+        if query == 'favicon.ico':
+            self.do_text('Not Found', status_code=404)
             return
         if query == LOGO_FILE:
             self.do_file(LOGO_FILE, 'image/svg+xml')
