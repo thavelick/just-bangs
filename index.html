@@ -6,8 +6,12 @@
   <link rel="search" type="application/opensearchdescription+xml" title="Just Bangs" href="/search.xml" />
   <title>Just Bangs!</title>
   <style>
-    html {
+    html,
+    input {
       font-family: "Tex Gyre Heros", "Nimbus Sans L", Helvetica, Arial, sans-serif;
+    }
+
+    html {
       font-size: 100%;
       background: white url("just-bangs.svg") no-repeat left bottom;
       background-size: auto 100%;
@@ -34,11 +38,9 @@
     }
 
     input {
-      font-family: "Tex Gyre Heros", "Nimbus Sans L", Helvetica, Arial, sans-serif;
       border-radius: 0.2em;
       padding: 0.3em 0.2em 0.05em;
       font-size: 160%;
-
     }
 
     input[type="text"] {
@@ -59,6 +61,20 @@
       cursor: pointer;
       flex: none;
       margin-left: 0.2em;
+    }
+
+    @media (prefers-color-scheme: dark) {
+
+      html,
+      input[type="text"] {
+        background-color: #2d4f8e;
+      }
+
+      html,
+      h1,
+      input[type="text"] {
+        color: white;
+      }
     }
   </style>
 </head>
