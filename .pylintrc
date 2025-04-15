@@ -1,0 +1,5 @@
+[MESSAGES CONTROL]
+disable=
+    C0116, # missing-function-docstring
+    C0115, # missing-class-docstring
+    C0114 # missing-module-docstring
