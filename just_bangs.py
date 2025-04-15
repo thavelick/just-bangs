@@ -13,17 +13,18 @@ CUSTOM_FILE = os.environ.get("JUST_BANGS_CUSTOM_FILE", "custom-bang.js")
 BASE_URL_PATH = "/" + os.environ.get("JUST_BANGS_BASE_URL_PATH", "").strip("/")
 
 LOGO_FILE = "just-bangs.svg"
-USAGE = ("give me a bang! Example: http://localhost:{}/gh!+just+bangs").format(PORT)
+USAGE = f"give me a bang! Example: http://localhost:{PORT}/gh!+just+bangs"
 
-with open(MAIN_FILE, "r") as f:
+with open(MAIN_FILE, "r", encoding="utf-8") as f:
     bangs = json.loads(f.read())
 
 if Path(CUSTOM_FILE).exists():
-    with open(CUSTOM_FILE, "r") as f:
+    with open(CUSTOM_FILE, "r", encoding="utf-8") as f:
         bangs = json.loads(f.read()) + bangs
 
 
 class JustBangsHandler(http.server.BaseHTTPRequestHandler):
+    # pylint: disable=invalid-name
     def do_GET(self):
         path = self.path
 
@@ -81,8 +82,8 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
         self.do_text(USAGE, status_code=404)
 
     def do_file(self, path, content_type):
-        with open(path, "r") as f:
-            content = f.read()
+        with open(path, "r", encoding="utf-8") as file:
+            content = file.read()
         self.do_text(content, content_type)
 
     def do_search_xml(self):
@@ -98,7 +99,7 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
     <InputEncoding>UTF-8</InputEncoding>
     <Url type="text/html" method="get" template="{search_url}"/>
     <Url type="application/x-suggestions+json" template="https://duckduckgo.com/ac/?q={{searchTerms}}&amp;type=list"/>
-    <moz:SearchForm>https://bangs.tristanhavelick.com/</moz:SearchForm>
+    <moz:SearchForm>{protocol}://{host}/</moz:SearchForm>
 </OpenSearchDescription>
         """
         self.do_text(content, "text/xml")
@@ -117,7 +118,7 @@ class JustBangsHandler(http.server.BaseHTTPRequestHandler):
         text = str.encode(text)
         self.send_response(status_code)
         self.send_header("Content-type", content_type)
-        self.send_header("Content-length", len(text))
+        self.send_header("Content-length", str(len(text)))
         self.end_headers()
         self.wfile.write(text)
 
